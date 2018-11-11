@@ -22,6 +22,11 @@ angular.module('myApp.view1', ['ngRoute'])
 
 	var medicoes = [];
 
+	var adicionarMedicao = function (medicao) {
+		$scope.data.medicoes.push(medicao);
+		$scope.$apply();
+	};
+
   if (annyang) {
     // Let's define our first command. First the text we expect, and then the function it should call
     var commands = {
@@ -58,32 +63,29 @@ angular.module('myApp.view1', ['ngRoute'])
 		},
 
 		'Temperatura :temperatura': function(temperatura) {
-			$scope.data.medicoes.push({
+			adicionarMedicao({
 				tipo: "Temperatura",
 				valor: temperatura,
 				data : Date.now()
 			});
-			$scope.$apply();
 			console.log('temperatura', temperatura);
 		},
 
 		'Pressão :pressao': function(pressao) {
-			$scope.data.medicoes.push({
+			adicionarMedicao({
 				tipo: "Pressão",
 				valor: pressao,
 				data : Date.now()
 			});
-			$scope.$apply();
 			console.log('pressao', pressao);
 		},
 
 		'Dor :dor': function(dor) {
-			$scope.data.medicoes.push({
+			adicionarMedicao({
 				tipo: "Dor",
 				valor: dor,
 				data : Date.now()
-			});
-			$scope.$apply();
+			}	);
 			console.log('dor', dor);
 		},
 		'Finalizar' : function() {
@@ -100,6 +102,13 @@ angular.module('myApp.view1', ['ngRoute'])
 			$http.post('http://localhost:3000/prontuarios', prontuario
 			).then(function successCallback(response) {
 				$scope.paciente = response.data[0];
+
+				$scope.data = {
+					numeroQuarto : null,
+					numeroLeito : null,
+					medicoes : [],
+					pacienteIdentificado: false
+				};
 			// this callback will be called asynchronously
 			// when the response is available
 			}, function errorCallback(response) {
