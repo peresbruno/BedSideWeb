@@ -5,6 +5,7 @@
 
   <div ng-show="paciente">
      Nome do paciente: <span class="badge">{{paciente.nome}}</span>
+     <br />
      Data de nascimento <span class="badge">{{paciente.nascimento}}</span>
   </div>
 
@@ -20,7 +21,7 @@
       <tr ng-repeat="medicao in data.medicoes">
         <td>{{medicao.data | date : 'd/M/yy hh:mm' }}</td>
         <td>{{medicao.tipo }}</td>
-        <td>{{medicao.valor}}</td>
+        <td>{{medicao.valor}}<span ng-if="medicao.tipo == 'Pressão'"> mmhg</span><span ng-if="medicao.tipo == 'Temperatura'"> °C</span></td>
       </tr>
     </tbody>
   </table>
