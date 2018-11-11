@@ -39,13 +39,8 @@ angular.module('myApp.view1', ['ngRoute'])
 			console.log('iniciar');
 		},
 
-		'Quarto :quarto': function(quarto) {
+		'Quarto :quarto Leito :leito': function(quarto, leito) {
 			$scope.data.numeroQuarto = quarto;
-			$scope.$apply();
-			console.log('quarto', quarto)
-		},
-
-		'Leito :leito': function(leito) {
 			$scope.data.numeroLeito = leito;
 			$scope.$apply();
 			console.log('leito', leito)
